@@ -27,4 +27,31 @@ const create = async (req, res) => {
   }
 };
 
-module.exports = { getAll, getOne, create };
+const update = async (req, res) => {
+  try {
+    const menu = await MenuItems.update(req.params.id, req.body);
+    res.send(menu);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+const deleteItem = async (req, res) => {
+  try {
+    const menu = await MenuItems.deleteItem(req.params.id);
+    res.send(menu);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+const searchQuery = async (req, res) => {
+  try {
+    const menu = await MenuItems.searchQuery(req.query.q);
+    res.send(menu);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+module.exports = { getAll, getOne, create, update, deleteItem, searchQuery };
