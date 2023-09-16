@@ -85,14 +85,17 @@ const getByStatus = async (status) => {
 const getTotalSales = async () => {
   const allOrders = await Order.find().populate("items.item");
 
-  let salesTotal = 0; 
+  let salesTotal = 0;
 
   allOrders.forEach((order) => {
-    const orderTotal = order.items.reduce((total, item) => total + item.item.price * item.quantity, 0)
+    const orderTotal = order.items.reduce(
+      (total, item) => total + item.item.price * item.quantity,
+      0
+    );
     salesTotal += orderTotal;
   });
 
-  const result = {total: salesTotal};
+  const result = { total: salesTotal };
   return result;
 };
 
